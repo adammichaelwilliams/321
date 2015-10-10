@@ -2,8 +2,9 @@
 	<title>321 Tools</title>
 </head>
 
-<body>
-	
+<body></body>
+
+<template name='main-layout'>
 	<div class='container-fluid'>
 		<div class='row'>
 			<div class='col-md-2 sidebar-container'>
@@ -11,13 +12,12 @@
 			</div>
 			<div class='col-md-10 content-container'>
 				{{#if currentUser }}
-					{{> content }}
+					{{> Template.dynamic template=main }}
 				{{else}}
 					{{> loginButtons }}
 				{{/if}}
 			</div>
 		</div>
 	</div>
-	
-</body>
+</template>
 

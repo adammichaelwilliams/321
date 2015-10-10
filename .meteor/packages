@@ -24,3 +24,4 @@ twbs:bootstrap
 fourseven:scss
 ian:accounts-ui-bootstrap-3
 momentjs:moment
+kadira:blaze-layout
