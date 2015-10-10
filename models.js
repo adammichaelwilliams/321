@@ -25,6 +25,53 @@ Meteor.startup(function() {
       });
     }
     if(Bogus.find().count() == 0) {
+      Bogus.insert({
+        name: 'bogus3',
+        b: 
+          { 
+            1: true,
+            2: 
+              {
+                c: true,
+                d: 
+                  {
+                    1: true,
+                    2: false
+                  },
+              },
+          }
+      });
+      Bogus.insert({
+        name: 'bogus4',
+        b: 
+          { 
+            1: true,
+            2: 
+              {
+                d: 
+                  {
+                    1: true,
+                    2: false
+                  },
+              },
+          }
+      });
+
+      Bogus.insert({
+        name: 'bogus6',
+        a: 
+          {  
+            1: true,
+            2: false,
+          },
+      });
+      Bogus.insert({
+        name: 'bogus7',
+        a: 
+          {  
+            1: true,
+          },
+      });
 
       Bogus.insert({
         name: 'bogus1',
