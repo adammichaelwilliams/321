@@ -48,5 +48,50 @@ Meteor.startup(function() {
           }
       });
     }
+    if(Bogus.find().count() == 1) {
+
+      Bogus.insert({
+        name: 'bogus2',
+        a: 
+          {  
+            1: true,
+          },
+        b: 
+          { 
+            1: true,
+            2: 
+              {
+                c: true,
+                d: 
+                  {
+                    1: true,
+                    2: false
+                  },
+              },
+          }
+      });
+      Bogus.insert({
+        name: 'bogus3',
+        a: 
+          {  
+            1: true,
+            2: true,
+          },
+        b: 
+          { 
+            1: true,
+            2: 
+              {
+                c: true,
+                d: 
+                  {
+                    1: true,
+                  },
+              },
+          }
+      });
+
+    }
+
   }
 });

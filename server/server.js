@@ -50,6 +50,8 @@ Meteor.methods({
 
     //start analyzing collection (async)
 
+    var generalDoc = {};
+
 
     collection.find({}).forEach(function(doc) {
 //      console.log(doc);
@@ -58,12 +60,62 @@ Meteor.methods({
       for(var item = iterator.next(); !item.done; item = iterator.next()) {
           var state = item.value;
           console.log(state.path.join('.'), state.node);
+
+          var path = state.path.join('.');
+
+          
+          //if(index(generalDoc, state.path)) {
+          if(generalDoc[path]) {
+            generalDoc[path].count++;
+          } else {
+            generalDoc[path] = {
+              count: 1
+            }
+          }
       }
     });
+
+    var str = JSON.stringify(generalDoc, null, 2);
+  
+    var newDoc = {}; 
+    _.each(generalDoc, function(val, key) {
+      var str = JSON.stringify(generalDoc, null, 2);
+      var str = JSON.stringify(newDoc, null, 2);
+//      var children = index(generalDoc, key);
+      index(newDoc, key, {
+        count: val.count,
+//        children: children
+      });
+    }); 
+    
+    var str = JSON.stringify(newDoc, null, 2);
+    console.log(str);
+
+    var totalCount = collection.find({}).count();
+    console.log("total docs: " + totalCount);
+
+    Meta.update({name: name}, {
+      $set: { 
+        fields: newDoc,
+        totalCount: totalCount
+      } 
+    });
+    
     //unblock()
     //update metadata document with progress
     //
     //finish analyzing collection, update metadata document
   }
 });
+
+function index(obj,is, value) {
+    if (typeof is == 'string')
+        return index(obj,is.split('.'), value);
+    else if (is.length==1 && value!==undefined)
+        return obj[is[0]] = value;
+    else if (is.length==0)
+        return obj;
+    else
+        return index(obj[is[0]],is.slice(1), value);
+}
 
