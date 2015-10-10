@@ -36,3 +36,23 @@ Template.collectionDocs.helpers({
 	
 });
 
+Template.collectionDetail.helpers({
+	jsonBlob: function(){
+		return JSON.stringify(
+			{
+				"hello": "world",
+				"foo": "bar",
+				"test": {
+					"open": 123
+				}
+			}
+		, null, 4);
+	}
+});
+
+Template.sidebar.helpers({
+	collections: function(){
+		return Meta.find({}, { sort: { name: 1 }});
+	}
+});
+

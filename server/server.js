@@ -20,9 +20,14 @@ Meteor.methods({
 
     _.each(mongoCollections, function(collection) {
 
-      console.log(collection.name);
+		// this doesnt have find
+      //console.log(collection.find().count());
+	  
       Meta.upsert({name: collection.name}, {
-        $set: {name: collection.name}
+        $set: {
+			name: collection.name,
+			totalCount: collection.find().count()
+		}
       });
       collectionNames.push(collection.name);
     });

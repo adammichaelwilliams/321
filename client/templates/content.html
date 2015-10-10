@@ -3,9 +3,12 @@
 </template>
 
 <template name="collectionDetail">
-	<h3>{{ collectionName }} analyzation</h3>
+	<h3>Collection Analysis: {{ collectionName }}</h3>
 	
-	This is where the results go
+	{{#markdown}}
+		{{ jsonBlob }}
+	{{/markdown}}
+	
 </template>
 
 <template name="collectionDocs">
@@ -13,7 +16,7 @@
 		<a href='/{{ collectionName }}/details' class='btn btn-primary'>Re-Analyze</a>
 	</div>
 	
-	<h3>{{ collectionName }} documents</h3>
+	<h3>Documents: {{ collectionName }}</h3>
 	
 	<table class='table table-striped'>
 		<thead>
