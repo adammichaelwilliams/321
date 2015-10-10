@@ -32,11 +32,10 @@ Template.collectionDetail.helpers({
 	},
 	
 	fields: function(){
-		return [{
-			"hello": {count:3},
-			"foo": {count:2},
-			"test": {count:2}
-		}];
+		var fields =  Meta.findOne({name:'bogus'}).fields;
+		console.log(fields);
+		
+		return fields;
 	}
 	
 });

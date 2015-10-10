@@ -21,6 +21,24 @@ html,body {
 	padding: 20px;
 	min-height: 100%;
 	overflow-x: hidden;
+	
+	ul {
+		list-style-type: none;
+		margin: 0px;
+		padding: 0px 0px 5px 15px;
+		
+		li {
+			
+			a {
+				color: #eee;
+				
+				&:hover {
+					text-decoration: none;
+				}
+			}
+			
+		}
+	}
 }
 
 .content-container {
