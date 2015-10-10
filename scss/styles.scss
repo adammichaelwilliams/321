@@ -5,10 +5,10 @@ html,body {
 #__blaze-root {
 	height: 100%;
 	overflow: scroll;
-	
+
 	>.container-fluid {
 		height: 100%;
-		
+
 		>.row {
 			height: 100%;
 		}
@@ -22,57 +22,58 @@ html,body {
 	min-height: 100%;
 	overflow-x: hidden;
 	letter-spacing: 1px;
-	
+
 	ul {
 		list-style-type: none;
 		margin: 0px;
 		padding: 0px 0px 5px 15px;
-		
+
 		li {
-			
+
 			a {
 				color: #eee;
-				
+
 				&:hover {
 					text-decoration: none;
 				}
 			}
-			
+
 		}
 	}
 }
 
 .content-container {
 	padding: 20px;
-	
+
 	.field-row {
 		height: 20px;
 		margin-bottom: 10px;
 		font-family: 'Courier New';
-		
+
 		.percbar {
 			display: inline-block;
-			width: 200px;
+			width: 300px;
 			margin-left: 200px;
+			position: absolute;
+    float: left;
 		}
-	
+
 		&.depth-1 {
 			padding-left: 15px;
 		}
-		
+
 		&.depth-2 {
 			padding-left: 30px;
 		}
-		
+
 		&.depth-3 {
 			padding-left: 45px;
 		}
-		
+
 		&.depth-4 {
 			padding-left: 60px;
 		}
 
 	}
-	
-}
 
+}
