@@ -32,10 +32,19 @@ Template.collectionDetail.helpers({
 	},
 	
 	fields: function(){
-		var fields =  Meta.findOne({name:'bogus'}).fields;
-		console.log(fields);
 		
-		return fields;
+		var coolList = [];
+		
+		var fields =  _.each(Meta.findOne({name:'bogus'}).dummy, function(val,key){
+			
+			coolList.push({
+				key: _.last(key.split('#')),
+				val: val,
+				depth: key.split('#').length
+			});
+		});
+		
+		return coolList;
 	}
 	
 });

@@ -9,7 +9,18 @@
 	<h3>Collection Analysis: {{ collectionName }}</h3>
 	
 	{{#each fields}}
-		stuff
+		<div class='depth-{{ depth }} field-row'>
+			
+			<span>{{ key }}: {{ val.count }}</span>
+			<div class='percbar'>
+				<div class='progress'>
+					<div class='progress-bar' style="width:70%">
+						<span class="sr-only">70% Complete</span>
+					</div>
+				</div>
+			</div>
+			
+		</div>
 	{{/each}}
 	
 </template>
