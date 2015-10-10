@@ -14,7 +14,7 @@
 			<span>{{ key }}: {{ val.count }}</span>
 			<div class='percbar'>
 				<div class='progress'>
-					<div class='progress-bar' style="width: {{perc}}%">
+          <div class='progress-bar {{#if is100}}progress-bar-success{{/if}}' style="width: {{perc}}%">
 						<span class="sr-only">{{perc}}% Complete</span>
 					</div>
 				</div>

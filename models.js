@@ -2,7 +2,6 @@
 //meta321-{{uid}}
 Meta = new Mongo.Collection("meta321");
 Cities = new Mongo.Collection("cities");
-Houses = new Mongo.Collection("houses");
 Bogus = new Mongo.Collection("bogus");
 
 Meteor.startup(function() {
@@ -94,8 +93,6 @@ Meteor.startup(function() {
               },
           }
       });
-    }
-    if(Bogus.find().count() == 1) {
 
       Bogus.insert({
         name: 'bogus2',

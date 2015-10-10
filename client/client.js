@@ -38,11 +38,14 @@ Template.collectionDetail.helpers({
 		var col = Meta.findOne({name:FlowRouter.getParam('collectionName')});
 		var fields =  _.each(col.dummy, function(val,key){
 
+      var percent = (val.count / col.totalCount) * 100;
+      var is100 = (percent == 100);
 			coolList.push({
 				key: _.last(key.split('#')),
 				val: val,
 				depth: key.split('#').length,
-				perc: (val.count / col.totalCount) * 100
+				perc: (val.count / col.totalCount) * 100,
+        is100: is100 
 			});
 		});
 

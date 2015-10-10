@@ -23,13 +23,16 @@ Meteor.methods({
 		// this doesnt have find
       //console.log(collection.find().count());
 	  
-      Meta.upsert({name: collection.name}, {
-        $set: {
-          name: collection.name
-        }
-      });
-      collectionNames.push(collection.name);
-      if(collection.name != "meta321") {
+      if(collection.name != "meta321" &&
+         collection.name != "meteor_autoupdate_clientVersions" &&
+         collection.name != "meteor_accounts_loginServiceConfiguration") {
+
+        Meta.upsert({name: collection.name}, {
+          $set: {
+            name: collection.name
+          }
+        });
+        collectionNames.push(collection.name);
         Meteor.call('analyzeCollection', collection.name);
       }
     });
