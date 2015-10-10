@@ -7,6 +7,29 @@
 </template>
 
 <template name="collectionDocs">
-	This is the collection documents for: {{ collection }}
+	<h3>{{ collection }} documents</h3>
+	
+	<table class='table table-striped'>
+		<thead>
+			<tr>
+				<th>foo</th>
+				<th>bar</th>
+				<th>baz</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each collectionDocs }}
+				{{> collectionDocRow }}
+			{{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="collectionDocRow">
+	<tr>
+		<td>{{ foo }}</td>
+		<td>{{ bar }}</td>
+		<td>{{ baz }}</td>
+	</tr>
 </template>
 
