@@ -29,7 +29,9 @@ Meteor.methods({
         }
       });
       collectionNames.push(collection.name);
-      Meteor.call('analyzeCollection', collection.name);
+      if(collection.name != "meta321") {
+        Meteor.call('analyzeCollection', collection.name);
+      }
     });
 
     return collectionNames;
