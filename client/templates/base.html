@@ -6,10 +6,10 @@
 	
 	<div class='container-fluid'>
 		<div class='row'>
-			<div class='col-md-3 sidebar-container'>
+			<div class='col-md-2 sidebar-container'>
 				{{> sidebar }}
 			</div>
-			<div class='col-md-9 content-container'>
+			<div class='col-md-10 content-container'>
 				{{#if currentUser }}
 					{{> content }}
 				{{else}}
@@ -20,13 +20,4 @@
 	</div>
 	
 </body>
-
-<template name="sidebar">
-	<h1>321</h1>
-	sidebar here
-</template>
-
-<template name="content">
-	main template here
-</template>
 
