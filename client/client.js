@@ -1,16 +1,19 @@
 
 Template.collectionDetail.helpers({
 	
-	collection: function(){
+	collectionName: function(){
 		// Todo the whole thing
 		return FlowRouter.getParam('collectionName');
+	},
+	
+	analyizationResults: function(){
 	}
 	
 });
 
 Template.collectionDocs.helpers({
 	
-	collection: function(){
+	collectionName: function(){
 		// Todo the whole thing
 		return FlowRouter.getParam('collectionName');
 	},
