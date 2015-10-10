@@ -1,5 +1,9 @@
+
+//meta321-{{uid}}
+Meta = new Mongo.Collection("meta321");
 Cities = new Mongo.Collection("cities");
 Houses = new Mongo.Collection("houses");
+Bogus = new Mongo.Collection("bogus");
 
 Meteor.startup(function() {
   if (Meteor.isServer) {
@@ -18,6 +22,30 @@ Meteor.startup(function() {
       });
       Cities.insert({
         name: 'New York'
+      });
+    }
+    if(Bogus.find().count() == 0) {
+
+      Bogus.insert({
+        name: 'bogus1',
+        a: 
+          {  
+            1: true,
+            2: false,
+          },
+        b: 
+          { 
+            1: true,
+            2: 
+              {
+                c: true,
+                d: 
+                  {
+                    1: true,
+                    2: false
+                  },
+              },
+          }
       });
     }
   }
