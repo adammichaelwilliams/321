@@ -2,7 +2,7 @@
 
 Template.test.created = function() {
 
-  Meteor.call('test', function(err, res) {
+  Meteor.call('updateMetaCollections', function(err, res) {
     Session.set('collectionNames', res);
   });
 }
