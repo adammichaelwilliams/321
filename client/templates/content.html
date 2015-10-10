@@ -1,5 +1,5 @@
 <template name="collectionsList">
-	This is the collection list
+	<em>Please choose a collection on the left</em>
 </template>
 
 <template name="collectionDetail">
@@ -9,6 +9,10 @@
 </template>
 
 <template name="collectionDocs">
+	<div class='pull-right'>
+		<a href='/{{ collectionName }}/details' class='btn btn-primary'>Re-Analyze</a>
+	</div>
+	
 	<h3>{{ collectionName }} documents</h3>
 	
 	<table class='table table-striped'>
