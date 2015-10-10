@@ -25,11 +25,11 @@ Meteor.methods({
 	  
       Meta.upsert({name: collection.name}, {
         $set: {
-			name: collection.name,
-			totalCount: collection.find().count()
-		}
+          name: collection.name
+        }
       });
       collectionNames.push(collection.name);
+      Meteor.call('analyzeCollection', collection.name);
     });
 
     return collectionNames;
