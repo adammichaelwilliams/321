@@ -1,12 +1,37 @@
-<template name="collections-list">
+<template name="collectionsList">
 	This is the collection list
 </template>
 
-<template name="collection-detail">
-	This is the collection analyization results
+<template name="collectionDetail">
+	<h3>{{ collectionName }} analyzation</h3>
+	
+	This is where the results go
 </template>
 
-<template name="collection-docs">
-	This is the collection documents
+<template name="collectionDocs">
+	<h3>{{ collectionName }} documents</h3>
+	
+	<table class='table table-striped'>
+		<thead>
+			<tr>
+				<th>foo</th>
+				<th>bar</th>
+				<th>baz</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each collectionDocs }}
+				{{> collectionDocRow }}
+			{{/each}}
+		</tbody>
+	</table>
+</template>
+
+<template name="collectionDocRow">
+	<tr>
+		<td>{{ foo }}</td>
+		<td>{{ bar }}</td>
+		<td>{{ baz }}</td>
+	</tr>
 </template>
 
