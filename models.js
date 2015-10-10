@@ -24,7 +24,7 @@ Meteor.startup(function() {
         name: 'New York'
       });
     }
-    if(Bogus.find().count() == 0) {
+    if(Bogus.find().count() <= 3) {
       Bogus.insert({
         name: 'bogus3',
         b: 
