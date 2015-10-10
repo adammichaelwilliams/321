@@ -1,16 +1,4 @@
 
-Template.collectionDetail.helpers({
-	
-	collectionName: function(){
-		// Todo the whole thing
-		return FlowRouter.getParam('collectionName');
-	},
-	
-	analyizationResults: function(){
-	}
-	
-});
-
 Template.collectionDocs.helpers({
 	
 	collectionName: function(){
@@ -37,17 +25,20 @@ Template.collectionDocs.helpers({
 });
 
 Template.collectionDetail.helpers({
-	jsonBlob: function(){
-		return JSON.stringify(
-			{
-				"hello": "world",
-				"foo": "bar",
-				"test": {
-					"open": 123
-				}
-			}
-		, null, 4);
+	
+	collectionName: function(){
+		// Todo the whole thing
+		return FlowRouter.getParam('collectionName');
+	},
+	
+	fields: function(){
+		return [{
+			"hello": {count:3},
+			"foo": {count:2},
+			"test": {count:2}
+		}];
 	}
+	
 });
 
 Template.sidebar.helpers({
