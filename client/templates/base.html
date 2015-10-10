@@ -1,0 +1,23 @@
+<head>
+	<title>321 Tools</title>
+</head>
+
+<body>
+	
+	<div class='container-fluid'>
+		<div class='row'>
+			<div class='col-md-2 sidebar-container'>
+				{{> sidebar }}
+			</div>
+			<div class='col-md-10 content-container'>
+				{{#if currentUser }}
+					{{> content }}
+				{{else}}
+					{{> loginButtons }}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	
+</body>
+
