@@ -2,12 +2,19 @@
 	
 	<h1>321</h1>
 	
-	<strong>COLLECTIONS</strong>
-	<ul>
-		{{#each collections }}
-			<li><a href="#">{{ name }}</a></li>
-		{{/each}}
-	</ul>
+	{{#if currentUser }}
+		<strong>COLLECTIONS</strong>
+		<ul>
+			{{#each collections }}
+				<li><a href="/{{ name }}/documents">{{ name }}</a></li>
+			{{/each}}
+		</ul>
+		
+		<strong>SETTINGS</strong><br/>
+		<strong>LOGOUT</strong>
+	{{else}}
+		<em>Please log in</em>
+	{{/if}}
 	
 </template>
 
