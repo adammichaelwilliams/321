@@ -1,14 +1,32 @@
 <head>
-  <title>321</title>
+	<title>321 Tools</title>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+	
+	<div class='container-fluid'>
+		<div class='row'>
+			<div class='col-md-3 sidebar-container'>
+				{{> sidebar }}
+			</div>
+			<div class='col-md-9 content-container'>
+				{{#if currentUser }}
+					{{> content }}
+				{{else}}
+					{{> loginButtons }}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+	
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="sidebar">
+	<h1>321</h1>
+	sidebar here
 </template>
+
+<template name="content">
+	main template here
+</template>
+
