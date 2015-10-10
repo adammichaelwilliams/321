@@ -54,6 +54,7 @@ Meteor.methods({
     //start analyzing collection (async)
 
     var generalDoc = {};
+    var dummyDoc = {};
 
 
     collection.find({}).forEach(function(doc) {
@@ -65,6 +66,7 @@ Meteor.methods({
           console.log(state.path.join('.'), state.node);
 
           var path = state.path.join('.');
+          var dummyPath = state.path.join('#');
 
           
           //if(index(generalDoc, state.path)) {
@@ -75,6 +77,14 @@ Meteor.methods({
               count: 1
             }
           }
+          if(dummyDoc[dummyPath]) {
+            dummyDoc[dummyPath].count++;
+          } else {
+            dummyDoc[dummyPath] = {
+              count: 1
+            }
+          }
+
       }
     });
 
@@ -82,8 +92,6 @@ Meteor.methods({
   
     var newDoc = {}; 
     _.each(generalDoc, function(val, key) {
-      var str = JSON.stringify(generalDoc, null, 2);
-      var str = JSON.stringify(newDoc, null, 2);
 //      var children = index(generalDoc, key);
       index(newDoc, key, {
         count: val.count,
@@ -100,6 +108,7 @@ Meteor.methods({
     Meta.update({name: name}, {
       $set: { 
         fields: newDoc,
+        dummy: dummyDoc,
         totalCount: totalCount
       } 
     });
