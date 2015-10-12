@@ -105,8 +105,7 @@ Meteor.methods({
 
     //start analyzing collection (async)
 
-    var generalDoc = {};
-    var dummyDoc = {};
+    var hdfTree = {};
 
     var RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 
@@ -119,49 +118,63 @@ Meteor.methods({
           console.log(state.path.join('.'), state.node);
 
           var path = state.path.join('.');
-          var dummyPath = state.path.join('#');
+          var hashPath = state.path.join('#');
 
+          var value = state.node;
+
+          var type = typeof value;
+
+          //TODO
+          //- isArray
+          //- isObject
+          //- isArguments
+          //- isFunction
+          //- isString
+          //- isNumber
+          //- isFinite
+          //- isBoolean
+          //- isDate
+          //- isRegExp
+          //- isNaN
+          //- isNull
+          //- isUndefined
+          if(type === 'object') {
+
+            //Example:
+            if(_.isArray(type)) {
+              type = "array";
+            }
+          }
+
+          console.log("type: ");
+          console.log(type);
           
-          //if(index(generalDoc, state.path)) {
-          if(generalDoc[path]) {
-            generalDoc[path].count++;
-          } else {
-            generalDoc[path] = {
-              count: 1
+          var depth = state.path.length - 1; //0 based depth
+          if(hdfTree[hashPath] && hdfTree[hashPath].types) {
+            if(hdfTree[hashPath].types[type]) {
+              hdfTree[hashPath].types[type]++
+            } else {
+              hdfTree[hashPath].types[type] = 1;
             }
-          }
-          if(dummyDoc[dummyPath]) {
-            dummyDoc[dummyPath].count++;
+            hdfTree[hashPath].types['total']++;
           } else {
-            dummyDoc[dummyPath] = {
-              count: 1
-            }
+            hdfTree[hashPath] = {};
+            hdfTree[hashPath].types = {};
+            hdfTree[hashPath].depth = depth;
+            hdfTree[hashPath].types[type] = 1;
+            hdfTree[hashPath].types['total'] = 1;
           }
-
       }
     });
 
-    var str = JSON.stringify(generalDoc, null, 2);
-  
-    var newDoc = {}; 
-    _.each(generalDoc, function(val, key) {
-//      var children = index(generalDoc, key);
-      index(newDoc, key, {
-        count: val.count,
-//        children: children
-      });
-    }); 
-    
-    var str = JSON.stringify(newDoc, null, 2);
-    console.log(str);
+    console.log(hdfTree);
 
     var totalCount = collection.find({}).count();
     console.log("total docs: " + totalCount);
 
     Meta.update({name: name}, {
       $set: { 
-        fields: newDoc,
-        dummy: dummyDoc,
+        dummy: hdfTree,
         totalCount: totalCount
       } 
     });
