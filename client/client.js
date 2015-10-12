@@ -52,7 +52,7 @@ Template.collectionDetail.helpers({
 		return FlowRouter.getParam('collectionName');
 	},
 
-  fields: function(){
+	fields: function(){
 		
 		var metaCollection = Meta.findOne({
 			name: FlowRouter.getParam('collectionName')
@@ -63,10 +63,28 @@ Template.collectionDetail.helpers({
 			return [];
 		}
 		
+		// Convert the object of fields to a list
 		var fieldNodes = _.map(_.keys(metaCollection.fields), function(fieldNodeKey){
 			var thisNode = metaCollection.fields[fieldNodeKey];
 			thisNode.key = _.last(fieldNodeKey.split('#'));
+			
 			return thisNode;
+			
+		});
+		
+		// Add some styling bits
+		_.forEach(fieldNodes, function(thisNode, idx){
+			var prevNode = fieldNodes[idx - 1];
+			var nextNode = fieldNodes[idx + 1];
+			
+			if(!nextNode || nextNode.depth != thisNode.depth){
+				thisNode.roundBLcorner = true;
+			}
+			
+			if(!prevNode || prevNode.depth > thisNode.depth){
+				thisNode.roundTLcorner = true;
+			}
+			
 		});
 		
 		return fieldNodes;
