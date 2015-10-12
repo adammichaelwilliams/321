@@ -20,7 +20,7 @@ It's super simple.
 
 Just hook this Meteor app into your Mongo database, and, assuming you don't have a collection titled "meta321" it will automagically analyze the gaps in your data.
 
-Built in [Tokyo](http://www.meetup.com/Meteor-Tokyo/events/225464906/) for the [Meteor Global Hackathon](http://info.meteor.com/blog/announcing-the-2015-meteor-global-distributed-hackathon)
+Built in [Tokyo](http://www.meetup.com/Meteor-Tokyo/events/225464906/) for the [Meteor Global Distributed Hackathon](http://info.meteor.com/blog/announcing-the-2015-meteor-global-distributed-hackathon)
 
 
 
