@@ -11,10 +11,22 @@ Meteor.publish('queryResult', function(collectionName, queryString, parameterStr
   var selectedCollection = Mongo.Collection.get(collectionName);
 
   var query;
-  eval("var query = " + queryString);
+  try {
+    eval("var query = " + queryString);
+  } 
+  catch(err) {
+    console.log(err);
+    query = {}
+  }
   
   var params;
-  eval("var params = " + parameterString);
+  try {
+    eval("var params = " + parameterString);
+  } 
+  catch(err) {
+    console.log(err);
+    params = {}
+  }
 
   if(!query) {
     query = {};
@@ -42,8 +54,6 @@ Meteor.publish('metaCollections', function() {
   return Meta.find({});
 });
 
-
-RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 
 Meteor.methods({
  
@@ -98,6 +108,7 @@ Meteor.methods({
     var generalDoc = {};
     var dummyDoc = {};
 
+    var RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 
     collection.find({}).forEach(function(doc) {
 //      console.log(doc);
