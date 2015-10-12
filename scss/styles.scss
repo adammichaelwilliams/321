@@ -46,27 +46,26 @@ html,body {
 .content-container {
 	padding: 20px;
 
-	.field-row {
-		height: 20px;
-		margin-bottom: 10px;
-		font-family: 'Courier New';
-
-		&.depth-1 {
-			padding-left: 15px;
+	.details-page {
+		/* The analyzed results page */
+		
+		.analyzed-field-row {
+			margin-bottom: 10px;
+			
+			.key-container {
+				padding-left: 15px;
+				
+				.key-name {
+					font-family: 'Courier New';
+				}
+			}
+			.type-split-bar {
+				
+				.progress {
+					margin-bottom: 0px;
+				}
+			}
 		}
-
-		&.depth-2 {
-			padding-left: 30px;
-		}
-
-		&.depth-3 {
-			padding-left: 45px;
-		}
-
-		&.depth-4 {
-			padding-left: 60px;
-		}
-
 	}
 
 }
