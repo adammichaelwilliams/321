@@ -58,19 +58,19 @@ html,body {
 					font-family: 'Courier New';
 					border: 1px solid #bbb;
 					border-width: 0px 0px 1px 1px;
-					padding: 5px 15px;
+					padding: 8px 15px;
 				}
 			}
 			.type-split-bar {
 				
 				.progress {
-					margin-bottom: 0px;
+					margin: 8px 0px 0px 0px;
 					
 					.type-undefined {
 						background-color: #4e5d6c; // dark grey
 					}
 					.type-string {
-						background-color: #df691a; //orange
+						background-color: #df691a; // orange
 					}
 					.type-boolean {
 						background-color: #5cb85c; // green
