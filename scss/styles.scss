@@ -66,17 +66,20 @@ html,body {
 				.progress {
 					margin-bottom: 0px;
 					
+					.type-undefined {
+						background-color: #4e5d6c; // dark grey
+					}
 					.type-string {
-						background-color: blue;
+						background-color: #df691a; //orange
 					}
 					.type-boolean {
-						background-color: green;
+						background-color: #5cb85c; // green
 					}
 					.type-object {
-						background-color: yellow;
+						background-color: #5bc0de; // blue
 					}
 					.type-number {
-						background-color: red;
+						background-color: #d9534f; // red
 					}
 					
 				}
