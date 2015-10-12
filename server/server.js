@@ -37,6 +37,11 @@ Meteor.publish('queryResult', function(collectionName, queryString, parameterStr
 //  return selectedCollection.find({}, {limit: 1});
 });
 
+Meteor.publish('metaCollections', function() {
+
+  return Meta.find({});
+});
+
 
 RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 

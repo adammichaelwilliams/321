@@ -24,6 +24,22 @@ Template.collectionDocs.helpers({
 
 });
 
+Tracker.autorun(function() {
+  Meteor.subscribe('metaCollections');
+});
+
+/*
+Template.collectionDetail.created = function() {
+
+  this.metaHandle = Meteor.subscribe('metaCollections');
+}
+Template.collectionDetail.destroyed = function() {
+  
+  this.metaHandle.stop();
+}
+*/
+
+
 Template.collectionDetail.helpers({
 
 	collectionName: function(){
