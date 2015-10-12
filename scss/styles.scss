@@ -50,13 +50,15 @@ html,body {
 		/* The analyzed results page */
 		
 		.analyzed-field-row {
-			margin-bottom: 10px;
 			
 			.key-container {
 				padding-left: 15px;
 				
 				.key-name {
 					font-family: 'Courier New';
+					border: 1px solid #333;
+					border-width: 0px 0px 1px 1px;
+					padding: 5px 15px;
 				}
 			}
 			.type-split-bar {
