@@ -9,26 +9,15 @@
 	<h3>Collection Analysis: {{ collectionName }}</h3>
 	
 	{{#each fields}}
-		<div class='depth-{{ depth }} field-row'>
-			
-			<span>{{ key }}: {{ val.count }}</span>
-			<div class='percbar'>
-				<div class='progress'>
-          <div class='progress-bar {{#if is100}}progress-bar-success{{/if}}' style="width: {{perc}}%">
-						<span class="sr-only">{{perc}}% Complete</span>
-					</div>
-				</div>
-			</div>
-			
-		</div>
+		{{> displayNode }}
 	{{/each}}
 	
 </template>
 
 <template name="displayNode">
-	{{#each fields}}
-		
-	{{/each}}
+	<div class="analyzed-field-row">
+		{{ key }}!!
+	</div>
 </template>
 
 

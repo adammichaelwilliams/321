@@ -48,24 +48,51 @@ Template.collectionDetail.helpers({
 	},
 
 	fields: function(){
-
-		var coolList = [];
-
-		var col = Meta.findOne({name:FlowRouter.getParam('collectionName')});
-		var fields =  _.each(col.dummy, function(val,key){
-
-      var percent = (val.count / col.totalCount) * 100;
-      var is100 = (percent == 100);
-			coolList.push({
-				key: _.last(key.split('#')),
-				val: val,
-				depth: key.split('#').length,
-				perc: (val.count / col.totalCount) * 100,
-        is100: is100 
-			});
+		
+		var dummyData = [
+			{
+				'key': 'propertyType',
+				'types': {
+					'string': 9,
+					'integer': 49,
+					'object': 19,
+					'not-found': 4,
+					'total': 104
+				},
+				'children': [
+					{
+						'key': 'houseType',
+						'types': {
+							'string': 94,
+							'not-found': 4,
+							'total': 95
+						}
+					},
+					{
+						'key': 'acreage',
+						'types': {
+							'string': 94,
+							'total': 99
+						}
+					}
+				]
+			},
+			{
+				key: 'secondTopKey',
+				types: {
+					'string': 4,
+					'total': 4
+				}
+			}
+		]
+		
+		var metaCol = Meta.findOne({name:FlowRouter.getParam('collectionName')});
+		
+		var fields = _.each(dummyData, function(val,key){
+			//
 		});
 
-		return coolList;
+		return fields;
 	}
 
 });
@@ -75,3 +102,4 @@ Template.sidebar.helpers({
 		return Meta.find({}, { sort: { name: 1 }});
 	}
 });
+
