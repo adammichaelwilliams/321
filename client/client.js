@@ -45,7 +45,6 @@ Template.collectionDetail.onCreated(function(){
 	}, 1000);
 });
 
-
 Template.collectionDetail.helpers({
 
 	collectionName: function(){
