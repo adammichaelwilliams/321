@@ -65,9 +65,24 @@ html,body {
 				
 				.progress {
 					margin-bottom: 0px;
+					
+					.type-string {
+						background-color: blue;
+					}
+					.type-boolean {
+						background-color: green;
+					}
+					.type-object {
+						background-color: yellow;
+					}
+					.type-number {
+						background-color: red;
+					}
+					
 				}
 			}
 		}
 	}
 
 }
+
