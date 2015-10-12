@@ -4,6 +4,40 @@ Meteor.startup(function () {
   // code to run on server at startup
 });
 
+
+// publish posts
+Meteor.publish('queryResult', function(collectionName, queryString, parameterString) {
+  
+  var selectedCollection = Mongo.Collection.get(collectionName);
+
+  var query;
+  eval("var query = " + queryString);
+  
+  var params;
+  eval("var params = " + parameterString);
+
+  if(!query) {
+    query = {};
+  }
+  if(!params) {
+    params = {};
+  }
+//  console.log(JSON.stringify(parameterString));
+
+  var cursor;
+  try {
+    cursor = selectedCollection.find(query, params);
+    //cursor = selectedCollection.find(query, parameterString);
+  }
+  catch(err) {
+    console.log(err);
+    cursor = [];
+  }
+  return cursor;
+//  return selectedCollection.find({}, {limit: 1});
+});
+
+
 RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 
 Meteor.methods({

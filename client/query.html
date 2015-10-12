@@ -1,0 +1,19 @@
+
+
+<template name="query">
+
+  <form id="runQuery">
+
+    <input type="text" />
+    <button type="submit">Run</button>
+  </form>
+
+  {{#each queryResult}} 
+    {{> documentRow}}
+  {{/each}}
+
+</template>
+
+<template name="documentRow">
+
+</template>
