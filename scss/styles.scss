@@ -51,6 +51,15 @@ html,body {
 		
 		.analyzed-field-row {
 			
+			&:hover {
+				// hmm
+				//background: #223242;
+			}
+			&.zebra {
+				// hmm
+				//background: #223242;
+			}
+			
 			.key-container {
 				padding-left: 15px;
 				
@@ -58,7 +67,7 @@ html,body {
 					font-family: 'Courier New';
 					border: 1px solid #bbb;
 					border-width: 0px 0px 1px 1px;
-					padding: 8px 15px;
+					padding: 10px 15px;
 					
 					&.round-bl-corner {
 						border-bottom-left-radius: 10px;
@@ -71,7 +80,7 @@ html,body {
 			.type-split-bar {
 				
 				.progress {
-					margin: 8px 0px 0px 0px;
+					margin: 10px 0px 0px 0px;
 					
 					.type-undefined {
 						background-color: #4e5d6c; // dark grey

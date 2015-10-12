@@ -16,7 +16,7 @@
 </template>
 
 <template name="fieldNode">
-	<div class="analyzed-field-row row">
+	<div class="analyzed-field-row row {{#if zebraBg}}zebra{{/if}}">
 		
 		<div class='col-md-4 key-container'>
 			<div class='key-name {{#if roundTLcorner}}round-tl-corner{{/if}} {{#if roundBLcorner}}round-bl-corner{{/if}}' style='margin-left: {{multiply depth 25 }}px'>{{ key }}</div>

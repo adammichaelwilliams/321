@@ -85,6 +85,10 @@ Template.collectionDetail.helpers({
 				thisNode.roundTLcorner = true;
 			}
 			
+			if(idx % 2){
+				thisNode.zebraBg = true;
+			}
+			
 		});
 		
 		return fieldNodes;
