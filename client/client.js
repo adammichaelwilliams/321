@@ -39,6 +39,12 @@ Template.collectionDetail.destroyed = function() {
 }
 */
 
+Template.collectionDetail.onCreated(function(){
+	setTimeout(function(){
+		$('[data-toggle="tooltip"]').tooltip();
+	}, 1000);
+});
+
 
 Template.collectionDetail.helpers({
 

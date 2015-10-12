@@ -3,8 +3,6 @@
 </template>
 
 
-
-
 <template name="collectionDetail">
 	<div class='details-page'>
 		
@@ -21,23 +19,18 @@
 	<div class="analyzed-field-row row">
 		
 		<div class='col-md-4 key-container'>
-			<div class='key-name' style='padding-left: {{multiply depth 15 }}px'>{{ key }}</div>
+			<div class='key-name' style='padding-left: {{multiply depth 20 }}px'>{{ key }}</div>
 		</div>
 		
 		<div class='col-md-8 type-split-bar'>
 			<div class='progress'>
-				<div class='progress-bar progress-bar-success' style='width:45%'>45%</div>
-				<div class='progress-bar progress-bar-warning' style='width:27%'>27%</div>
+				<div class='progress-bar progress-bar-success' data-toggle='tooltip' data-placement='top' title='45% of values are strings' style='width:45%'>45%</div>
+				<div class='progress-bar progress-bar-warning' data-toggle='tooltip' data-placement='top' title='27% of values are strings' style='width:27%'>27%</div>
 			</div>
 		</div>
 		
 	</div>
 </template>
-
-
-
-
-
 
 
 <template name="collectionDocs">
