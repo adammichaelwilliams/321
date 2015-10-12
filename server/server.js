@@ -156,13 +156,13 @@ Meteor.methods({
             } else {
               hdfTree[hashPath].types[type] = 1;
             }
-            hdfTree[hashPath].types['total']++;
+            hdfTree[hashPath].total++;
           } else {
             hdfTree[hashPath] = {};
             hdfTree[hashPath].types = {};
             hdfTree[hashPath].depth = depth;
             hdfTree[hashPath].types[type] = 1;
-            hdfTree[hashPath].types['total'] = 1;
+            hdfTree[hashPath].total = 1;
           }
       }
     });

@@ -23,9 +23,10 @@
 		</div>
 		
 		<div class='col-md-8 type-split-bar'>
-			<div class='progress'>
-				<div class='progress-bar progress-bar-success' data-toggle='tooltip' data-placement='top' title='45% of values are strings' style='width:45%'>45%</div>
-				<div class='progress-bar progress-bar-warning' data-toggle='tooltip' data-placement='top' title='27% of values are strings' style='width:27%'>27%</div>
+      <div class='progress'>
+        {{#each types}}
+        <div class='progress-bar type-{{type}} progress-bar-success' data-toggle='tooltip' data-placement='top' title='{{percent}}% of documents with values are {{type}}' style='width:{{totalPercent}}%'>{{type}}</div>
+        {{/each}}
 			</div>
 		</div>
 		

@@ -53,7 +53,7 @@ Template.collectionDetail.helpers({
 		return FlowRouter.getParam('collectionName');
 	},
 
-	fields: function(){
+  fields: function(){
 		
 		var metaCollection = Meta.findOne({
 			name: FlowRouter.getParam('collectionName')
@@ -73,6 +73,34 @@ Template.collectionDetail.helpers({
 		return fieldNodes;
 	}
 
+});
+
+Template.fieldNode.helpers({
+  types: function() {
+    var self = this;
+
+		var metaCollection = Meta.findOne({
+			name: FlowRouter.getParam('collectionName')
+		});
+
+    if(!metaCollection){
+			// Mongo probably hasn't sank yet
+			return 0;
+		}
+    var totalCount = metaCollection.totalCount;
+
+    console.log(this);
+    var total = 0;
+    var types = [];
+    _.each(this.types, function(value, type) {
+
+      types.push({ type: type, 
+                   percent: (100*(value/self.total)),
+                   totalPercent: (100*(value/totalCount))});
+    });
+
+    return types;
+  }
 });
 
 Template.sidebar.helpers({
