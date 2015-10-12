@@ -174,7 +174,7 @@ Meteor.methods({
 
     Meta.update({name: name}, {
       $set: { 
-        dummy: hdfTree,
+        fields: hdfTree,
         totalCount: totalCount
       } 
     });
