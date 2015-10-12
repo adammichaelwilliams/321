@@ -96,6 +96,9 @@ Template.fieldNode.helpers({
                    percent: (100*(value/self.total)),
                    totalPercent: (100*(value/totalCount))});
     });
+    types.push({type: 'undefined',
+                percent: (100-(100*(self.total/totalCount))),
+                totalPercent: (100-(100*(self.total/totalCount)))});
 
     return types;
   }
