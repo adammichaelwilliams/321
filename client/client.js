@@ -89,7 +89,6 @@ Template.fieldNode.helpers({
 		}
     var totalCount = metaCollection.totalCount;
 
-    console.log(this);
     var total = 0;
     var types = [];
     _.each(this.types, function(value, type) {
