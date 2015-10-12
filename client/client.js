@@ -93,12 +93,12 @@ Template.fieldNode.helpers({
     _.each(this.types, function(value, type) {
 
       types.push({ type: type, 
-                   percent: (100*(value/self.total)),
-                   totalPercent: (100*(value/totalCount))});
+                   percent: Math.round(100*(value/self.total)),
+                   totalPercent: Math.round(100*(value/totalCount))});
     });
     types.push({type: 'undefined',
-                percent: (100-(100*(self.total/totalCount))),
-                totalPercent: (100-(100*(self.total/totalCount)))});
+                percent: Math.round(100-(100*(self.total/totalCount))),
+                totalPercent: Math.round(100-(100*(self.total/totalCount)))});
 
     return types;
   }
