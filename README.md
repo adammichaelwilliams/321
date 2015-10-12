@@ -1,5 +1,3 @@
-# 321
-
 ![alt text](http://i.imgur.com/Ly1UpxS.png)
 
 ![alt text](http://i.imgur.com/Jhj3AEs.png)
