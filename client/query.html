@@ -25,9 +25,11 @@
 <template name="documentRow">
 
 <h2>{{_id}}</h2>
+<div class="documentRow">
 {{#markdown}}
 ```json
 {{prettyDoc}}
 ```
 {{/markdown}}
+</div>
 </template>
