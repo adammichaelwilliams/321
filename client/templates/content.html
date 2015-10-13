@@ -24,22 +24,24 @@
 		
 		<div class='col-md-8 type-split-bar'>
 			<div class='progress'>
-				{{#each types}}
-					<div
-						class='progress-bar type-{{type}}'
-						data-toggle='tooltip'
-						data-placement='top'
-						title='{{totalPercent}}% are {{type}}'
-						style='width:{{totalPercent}}%'>
-						{{type}}
-					</div>
-				{{/each}}
+        {{#each types}}
+          {{>progressBar}}
+			  {{/each}}
 			</div>
 		</div>
 		
 	</div>
 </template>
-
+<template name="progressBar">
+<div
+  class='progress-bar type-{{type}}'
+  data-toggle='tooltip'
+  data-placement='top'
+  title='{{totalPercent}}% are {{type}}'
+  style='width:{{totalPercent}}%'>
+  {{type}}
+</div>
+</template>
 
 <template name="collectionDocs">
 	<div class='pull-right'>

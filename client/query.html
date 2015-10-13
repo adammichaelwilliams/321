@@ -2,13 +2,21 @@
 
 <template name="query">
 
+  <div class="queryHelper">
+    <a href="http://docs.meteor.com/#/full/selectors" target="_blank">Mongo Selectors</a>
+  </div>
+  <div class="paramHelper">
+    <a href="http://docs.meteor.com/#/full/find" target="_blank">Meteor cursor options</a>
+  </div>
   <form id="runQuery">
-
-    <input type="text" />
+    <input id="query" type="text" value="{{queryString}}">
+    <input id="params" type="text" value="{{paramString}}">
     <button type="submit">Run</button>
   </form>
 
-  {{#each queryResult}} 
+  <h2>{{numResultString}}</h2>
+
+  {{#each queryResults}} 
     {{> documentRow}}
   {{/each}}
 
@@ -16,4 +24,10 @@
 
 <template name="documentRow">
 
+<h2>{{_id}}</h2>
+{{#markdown}}
+```json
+{{prettyDoc}}
+```
+{{/markdown}}
 </template>

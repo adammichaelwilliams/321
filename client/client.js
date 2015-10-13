@@ -62,11 +62,12 @@ Template.collectionDetail.helpers({
 			// Mongo probably hasn't sank yet
 			return [];
 		}
-		
+	
 		// Convert the object of fields to a list
 		var fieldNodes = _.map(_.keys(metaCollection.fields), function(fieldNodeKey){
 			var thisNode = metaCollection.fields[fieldNodeKey];
 			thisNode.key = _.last(fieldNodeKey.split('#'));
+			thisNode.hierarchy = fieldNodeKey;
 			
 			return thisNode;
 			
@@ -96,6 +97,37 @@ Template.collectionDetail.helpers({
 
 });
 
+Template.progressBar.events({
+
+  "click .progress-bar": function(e, t) {
+
+    e.preventDefault();
+
+    console.log(t);
+    var hierarchy = t.data.hierarchy;
+    var type = t.data.type;
+    
+    var path = hierarchy.replace(/#/g, '.');
+
+    var query = {}
+    if(type === "undefined") {
+      query[path] = { $exists: false }
+      query = '{ "' + path + '" : {$exists: false} }';
+    } else {
+      //TODO add type dependent logic for mongo query
+      //query[path] = { $exists: true }
+      query = '{ "' + path + '" : {$exists: true} }';
+    }
+
+    console.log(JSON.stringify(query));
+		var colName = FlowRouter.getParam('collectionName');
+
+    Session.set('queryString', query);
+    Session.set('paramString', "{}");
+
+    FlowRouter.go('/'+colName+'/query');
+  }
+});
 Template.fieldNode.helpers({
   types: function() {
     var self = this;
@@ -115,10 +147,12 @@ Template.fieldNode.helpers({
     _.each(this.types, function(value, type) {
 
       types.push({ type: type, 
+                   hierarchy: self.hierarchy,
                    percent: Math.round(100*(value/self.total)),
                    totalPercent: Math.round(100*(value/totalCount))});
     });
     types.push({type: 'undefined',
+                hierarchy: self.hierarchy,
                 percent: Math.round(100-(100*(self.total/totalCount))),
                 totalPercent: Math.round(100-(100*(self.total/totalCount)))});
 
