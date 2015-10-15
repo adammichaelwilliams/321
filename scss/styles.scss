@@ -105,14 +105,36 @@ html,body {
 	}
 
 }
+.analysis-view {
+  padding: 20px;
+}
+
+#runQuery {
+  font-size: 26px;
+}
+#runQuery .collectionName {
+  cursor: pointer;
+}
+#runQuery span {
+  cursor: default;
+  color: darkgrey;
+}
 
 .queryHelper {
   width: 50%;
   float: left;
 }
-input#query {
-  width: 50%;
+input#query, input#params{
+  width: 300px;
+  -webkit-appearance: none;
+  border: none;
+  color: white;
+  background-color: #2b3e50;
 }
+input#query:focus{
+//      outline: 0;
+}
+
 .progress-bar {
   cursor: pointer;
 }

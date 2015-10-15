@@ -7,12 +7,16 @@
 	<div class='details-page'>
 		
 		<h3>Collection Analysis: {{ collectionName }}</h3>
-		
+
+    <div class='analysis-view'>
 		{{#each fields}}
 			{{> fieldNode }}
-		{{/each}}
+    {{/each}}
+    </div>
 		
 	</div>
+  
+  {{>query}}
 </template>
 
 <template name="fieldNode">
@@ -30,14 +34,14 @@
 			</div>
 		</div>
 		
-	</div>
+  </div>
 </template>
 <template name="progressBar">
 <div
   class='progress-bar type-{{type}}'
   data-toggle='tooltip'
   data-placement='top'
-  title='{{totalPercent}}% are {{type}}'
+  title='{{number}} are {{type}}'
   style='width:{{totalPercent}}%'>
   {{type}}
 </div>

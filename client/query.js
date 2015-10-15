@@ -13,10 +13,9 @@ Template.query.created = function() {
   }
 
   self.autorun( function() {
-    Meteor.subscribe("queryResult", collectionName, Session.get('queryString'), Session.get('paramString'));
+    Meteor.subscribe("queryResult", FlowRouter.getParam('collectionName'), Session.get('queryString'), Session.get('paramString'));
   });
   
-  console.log('query template initialized');
 }
 
 Template.documentRow.helpers({
@@ -33,6 +32,15 @@ Template.query.helpers({
   paramString: function() {
     var paramString = Session.get('paramString');
     return paramString;
+  },
+  collectionName: function() {
+	  var collectionName = FlowRouter.getParam('collectionName');
+    return collectionName;
+  },
+  upperCollectionName: function() {
+	  var collectionName = FlowRouter.getParam('collectionName');
+    var string = collectionName;
+    return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
   },
   numResultString: function() {
 

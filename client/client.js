@@ -103,7 +103,6 @@ Template.progressBar.events({
 
     e.preventDefault();
 
-    console.log(t);
     var hierarchy = t.data.hierarchy;
     var type = t.data.type;
     
@@ -119,13 +118,12 @@ Template.progressBar.events({
       query = '{ "' + path + '" : {$exists: true} }';
     }
 
-    console.log(JSON.stringify(query));
 		var colName = FlowRouter.getParam('collectionName');
 
     Session.set('queryString', query);
     Session.set('paramString', "{}");
 
-    FlowRouter.go('/'+colName+'/query');
+//    FlowRouter.go('/'+colName+'/query');
   }
 });
 Template.fieldNode.helpers({
@@ -148,11 +146,13 @@ Template.fieldNode.helpers({
 
       types.push({ type: type, 
                    hierarchy: self.hierarchy,
+                   number: self.total,
                    percent: Math.round(100*(value/self.total)),
                    totalPercent: Math.round(100*(value/totalCount))});
     });
     types.push({type: 'undefined',
                 hierarchy: self.hierarchy,
+                number: totalCount - self.total,
                 percent: Math.round(100-(100*(self.total/totalCount))),
                 totalPercent: Math.round(100-(100*(self.total/totalCount)))});
 
