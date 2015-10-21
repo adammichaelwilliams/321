@@ -1,4 +1,6 @@
 
+DEFAULT_QUERY = "_id: {$exists: true}";
+DEFAULT_PARAM = "limit: 1";
 
 Template.query.created = function() {
   var self = this;
@@ -6,8 +8,8 @@ Template.query.created = function() {
 	var collectionName = FlowRouter.getParam('collectionName');
   if(!Session.get("queryString") || !Session.get("paramString")) {
 
-    var queryString = "";
-    var paramString = " limit: 1 ";
+    var queryString = DEFAULT_QUERY;
+    var paramString = DEFAULT_PARAM;
     Session.set("queryString", queryString);
     Session.set("paramString", paramString);
   }
@@ -120,12 +122,12 @@ Template.query.events({
     
     var paramString = t.find('input#params').value;
 
-    if(!queryString || queryString == "") {
-      queryString = '';
+    if(!queryString) {
+      queryString = "";
       t.find('input#query').value = queryString;
     }
-    if(!paramString || paramString == "") {
-      paramString = 'limit: 1';
+    if(!paramString) {
+      paramString = "";
       t.find('input#params').value = paramString;
     }
 
@@ -135,7 +137,7 @@ Template.query.events({
     } 
     catch(err) {
       //TODO set error state here
-      queryString = '';
+      queryString = DEFAULT_QUERY;
       t.find('input#query').value = queryString;
     }
     
@@ -144,7 +146,7 @@ Template.query.events({
       eval("var params = {" + paramString + "}");
     } 
     catch(err) {
-      paramString = 'limit: 1';
+      paramString = DEFAULT_PARAM;
       t.find('input#params').value = paramString;
     }
 

@@ -26,13 +26,21 @@
 			<div class='key-name {{#if roundTLcorner}}round-tl-corner{{/if}} {{#if roundBLcorner}}round-bl-corner{{/if}}' style='margin-left: {{multiply depth 25 }}px'>{{ key }}</div>
 		</div>
 		
-		<div class='col-md-8 type-split-bar'>
+		<div class='col-md-4 type-split-bar'>
 			<div class='progress'>
         {{#each types}}
           {{>progressBar}}
 			  {{/each}}
 			</div>
+    </div>
+		<div class='col-md-4 type-split-bar'>
+			<div class='progress'>
+        {{#each values}}
+          {{>valueBar}}
+			  {{/each}}
+			</div>
 		</div>
+	
 		
   </div>
 </template>
@@ -41,9 +49,21 @@
   class='progress-bar type-{{type}}'
   data-toggle='tooltip'
   data-placement='top'
+  data-original-title='{{number}} are {{type}}'
   title='{{number}} are {{type}}'
   style='width:{{totalPercent}}%'>
   {{type}}
+</div>
+</template>
+<template name="valueBar">
+<div
+  class='progress-bar type-{{value}}'
+  data-toggle='tooltip'
+  data-placement='top'
+  data-original-title='{{number}} are {{value}}'
+  title='{{number}} are {{value}}'
+  style='width:{{totalPercent}}%'>
+  {{value}}
 </div>
 </template>
 

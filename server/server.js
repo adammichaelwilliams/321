@@ -23,7 +23,7 @@ Meteor.publish('queryResult', function(collectionName, queryString, parameterStr
   var params;
   try {
     //eval("var params = " + parameterString);
-    eval("var params = {" + paramString + "}");
+    eval("var params = {" + parameterString + "}");
   } 
   catch(err) {
     console.log(err);
@@ -111,13 +111,33 @@ Meteor.methods({
 
     var RecursiveIterator = Meteor.npmRequire('recursive-iterator');
 
+    var collectionSize = collection.find({}).count();
+
+    //Throttle/threshold limits
+    // set the amount of unique items allowed
+    // this prevents the meta document from storing too many different
+    // values from various fields
+    // eventually this should be overridden on a per field basis
+    // Another way to do this, would be to take the values for the first
+    // say 5 documents, and then check to see if any other docs in that
+    // collection have the same values in the field
+    // This could incrementally ramp up to index all the values in that
+    // field, allowing us to forget about this threshold hack altogether.
+    var uniqueThreshold = 20; //for unique document fields
+
+    var smallThreshold = collectionSize * 0.5; 
+    //mark threshold at 50% of collectionSize if collection, less than 40 items
+    if(smallThreshold < uniqueThreshold) {
+      uniqueThreshold = smallThreshold;
+    }
+
     collection.find({}).forEach(function(doc) {
 //      console.log(doc);
       //traverse(doc, process);
       var iterator = new RecursiveIterator(doc);
       for(var item = iterator.next(); !item.done; item = iterator.next()) {
           var state = item.value;
-          console.log(state.path.join('.'), state.node);
+          //console.log(state.path.join('.'), state.node);
 
           var path = state.path.join('.');
           var hashPath = state.path.join('#');
@@ -148,9 +168,14 @@ Meteor.methods({
             }
           }
 
-          console.log("type: ");
-          console.log(type);
-          
+          //console.log("type: ");
+          //console.log(type);
+          if(type === "string") {
+            //https://docs.mongodb.org/manual/faq/developers/#faq-dollar-sign-escaping
+            value = value.replace(/\./g, "\uff0E");
+            value = value.replace(/\$/g, "\uff04");
+          }
+
           var depth = state.path.length - 1; //0 based depth
           if(hdfTree[hashPath] && hdfTree[hashPath].types) {
             if(hdfTree[hashPath].types[type]) {
@@ -158,21 +183,41 @@ Meteor.methods({
             } else {
               hdfTree[hashPath].types[type] = 1;
             }
+            if(type === "string" || type === "boolean" || type === "number") {
+              if(hdfTree[hashPath].vals[value]) {
+                hdfTree[hashPath].vals[value]++;
+              } else {
+                hdfTree[hashPath].vals[value] = 1;
+              }
+            }
+            if(hdfTree[hashPath].vals &&
+               _.size(hdfTree[hashPath].vals) > uniqueThreshold) {
+              hdfTree[hashPath].valType = "unique"; 
+            }
+
             hdfTree[hashPath].total++;
           } else {
             hdfTree[hashPath] = {};
             hdfTree[hashPath].types = {};
             hdfTree[hashPath].depth = depth;
             hdfTree[hashPath].types[type] = 1;
+            if(type === "string" || type === "boolean" || type === "number") {
+              hdfTree[hashPath].valType = "standard";
+              hdfTree[hashPath].vals = {};
+              hdfTree[hashPath].vals[value] = 1;
+            } else {
+              hdfTree[hashPath].valType = "object";
+            }
+
             hdfTree[hashPath].total = 1;
           }
       }
     });
 
-    console.log(hdfTree);
+    //console.log(hdfTree);
 
     var totalCount = collection.find({}).count();
-    console.log("total docs: " + totalCount);
+    //console.log("total docs: " + totalCount);
 
     Meta.update({name: name}, {
       $set: { 

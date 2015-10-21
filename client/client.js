@@ -157,6 +157,47 @@ Template.fieldNode.helpers({
                 totalPercent: Math.round(100-(100*(self.total/totalCount)))});
 
     return types;
+  },
+  values: function() {
+    var self = this;
+
+		var metaCollection = Meta.findOne({
+			name: FlowRouter.getParam('collectionName')
+		});
+
+    if(!metaCollection){
+			// Mongo probably hasn't sank yet
+			return 0;
+		}
+    var totalCount = metaCollection.totalCount;
+
+    var total = 0;
+    var values = [];
+    if(self.valType == "unique") {
+      values.push({ value: 'unique',
+                        number: self.total,
+                        percent: Math.round((100*(self.total/totalCount))),
+                        totalPercent: Math.round((100*(self.total/totalCount)))});
+    } else if(self.valType == "object") {
+      values.push({ value: 'object',
+                        number: self.total,
+                        percent: Math.round((100*(self.total/totalCount))),
+                        totalPercent: Math.round((100*(self.total/totalCount)))});
+    } else {
+      _.each(this.vals, function(count, value) {
+
+        values.push({  value: value, 
+                       number: count,
+                       percent: Math.round(100*(count/self.total)),
+                       totalPercent: Math.round(100*(count/totalCount))});
+      });
+    }
+    values.push({  value: 'undefined',
+                  number: totalCount - self.total,
+                  percent: Math.round(100-(100*(self.total/totalCount))),
+                  totalPercent: Math.round(100-(100*(self.total/totalCount)))});
+
+    return values;
   }
 });
 
