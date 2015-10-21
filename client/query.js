@@ -6,8 +6,8 @@ Template.query.created = function() {
 	var collectionName = FlowRouter.getParam('collectionName');
   if(!Session.get("queryString") || !Session.get("paramString")) {
 
-    var queryString = "{}";
-    var paramString = "{ limit: 1 }";
+    var queryString = "";
+    var paramString = " limit: 1 ";
     Session.set("queryString", queryString);
     Session.set("paramString", paramString);
   }
@@ -50,7 +50,8 @@ Template.query.helpers({
     var paramString = Session.get('paramString');
 
     try {
-      eval("var query = " + queryString);
+      //eval("var query = " + queryString);
+      eval("var query = {" + queryString +"}");
     } 
     catch(err) {
       console.log(err);
@@ -59,7 +60,8 @@ Template.query.helpers({
     
     var params;
     try {
-      eval("var params = " + paramString);
+      //eval("var params = " + paramString);
+      eval("var params = {" + paramString + "}");
     } 
     catch(err) {
       console.log(err);
@@ -86,7 +88,8 @@ Template.query.helpers({
     var paramString = Session.get('paramString');
 
     try {
-      eval("var query = " + queryString);
+      //eval("var query = " + queryString);
+      eval("var query = {" + queryString +"}");
     } 
     catch(err) {
       console.log(err);
@@ -95,7 +98,8 @@ Template.query.helpers({
     
     var params;
     try {
-      eval("var params = " + paramString);
+      //eval("var params = " + paramString);
+      eval("var params = {" + paramString + "}");
     } 
     catch(err) {
       console.log(err);
@@ -117,29 +121,30 @@ Template.query.events({
     var paramString = t.find('input#params').value;
 
     if(!queryString || queryString == "") {
-      queryString = '{}';
+      queryString = '';
       t.find('input#query').value = queryString;
     }
     if(!paramString || paramString == "") {
-      paramString = '{limit: 1}';
+      paramString = 'limit: 1';
       t.find('input#params').value = paramString;
     }
 
     try {
-      eval("var query = " + queryString);
+      //eval("var query = " + queryString);
+      eval("var query = {" + queryString +"}");
     } 
     catch(err) {
       //TODO set error state here
-      queryString = '{}';
+      queryString = '';
       t.find('input#query').value = queryString;
     }
     
     var params;
     try {
-      eval("var params = " + paramString);
+      eval("var params = {" + paramString + "}");
     } 
     catch(err) {
-      paramString = '{limit: 1}';
+      paramString = 'limit: 1';
       t.find('input#params').value = paramString;
     }
 

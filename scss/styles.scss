@@ -120,9 +120,16 @@ html,body {
   color: darkgrey;
 }
 
+#submitQuery {
+
+  margin-left: 30px;
+}
+
 .queryHelper {
-  width: 50%;
   float: left;
+  width: 320px;
+  float: left;
+  margin-left: 130px;
 }
 input#query, input#params{
   width: 300px;

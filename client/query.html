@@ -9,12 +9,12 @@
     <a href="http://docs.meteor.com/#/full/find" target="_blank">Meteor cursor options</a>
   </div>
   <form id="runQuery">
-    <span class="collectionName" data-toggle="tooltip" data-placement="bottom" title="" data-original-title='{{upperCollectionName}} = new Mongo.Collection("{{collectionName}}");'>{{upperCollectionName}}</span><span>.find(</span>
+    <span class="collectionName" data-toggle="tooltip" data-placement="bottom" title="" data-original-title='{{upperCollectionName}} = new Mongo.Collection("{{collectionName}}");'>{{upperCollectionName}}</span><span>.find({</span>
     <input id="query" type="text" value="{{queryString}}">
-    <span>,</span>
+    <span>},{</span>
     <input id="params" type="text" value="{{paramString}}">
-    <span>)</span>
-    <button class="btn btn-success" type="submit">Run</button>
+    <span>})</span>
+    <button id="submitQuery" class="btn btn-success" type="submit">Run</button>
   </form>
 
   <h4>{{numResultString}}</h4>

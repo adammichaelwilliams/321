@@ -111,17 +111,17 @@ Template.progressBar.events({
     var query = {}
     if(type === "undefined") {
       query[path] = { $exists: false }
-      query = '{ "' + path + '" : {$exists: false} }';
+      query = '"'+ path + '" : {$exists: false} ';
     } else {
       //TODO add type dependent logic for mongo query
       //query[path] = { $exists: true }
-      query = '{ "' + path + '" : {$exists: true} }';
+      query = '"' + path + '" : {$exists: true} ';
     }
 
 		var colName = FlowRouter.getParam('collectionName');
 
     Session.set('queryString', query);
-    Session.set('paramString', "{}");
+    Session.set('paramString', "");
 
 //    FlowRouter.go('/'+colName+'/query');
   }

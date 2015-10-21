@@ -12,7 +12,8 @@ Meteor.publish('queryResult', function(collectionName, queryString, parameterStr
 
   var query;
   try {
-    eval("var query = " + queryString);
+    //eval("var query = " + queryString);
+    eval("var query = {" + queryString +"}");
   } 
   catch(err) {
     console.log(err);
@@ -21,7 +22,8 @@ Meteor.publish('queryResult', function(collectionName, queryString, parameterStr
   
   var params;
   try {
-    eval("var params = " + parameterString);
+    //eval("var params = " + parameterString);
+    eval("var params = {" + paramString + "}");
   } 
   catch(err) {
     console.log(err);
