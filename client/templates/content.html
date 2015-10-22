@@ -6,7 +6,13 @@
 <template name="collectionDetail">
 	<div class='details-page'>
 		
-		<h3>Collection Analysis: {{ collectionName }}</h3>
+
+    <div class='toggle-view'>
+      <div class='select-types {{#if typesView}}selected{{/if}}'>Types</div>
+      <div class='select-values {{#if valuesView}}selected{{/if}}'>Values</div>
+    </div>
+    
+    <h3>Collection Analysis: {{ collectionName }}</h3>
 
     <div class='analysis-view'>
 		{{#each fields}}
@@ -25,21 +31,24 @@
 		<div class='col-md-4 key-container'>
 			<div class='key-name {{#if roundTLcorner}}round-tl-corner{{/if}} {{#if roundBLcorner}}round-bl-corner{{/if}}' style='margin-left: {{multiply depth 25 }}px'>{{ key }}</div>
 		</div>
-		
-		<div class='col-md-4 type-split-bar'>
+
+    {{#if typesView}}
+		<div class='col-md-8 type-split-bar'>
 			<div class='progress'>
         {{#each types}}
           {{>progressBar}}
 			  {{/each}}
 			</div>
     </div>
-		<div class='col-md-4 type-split-bar'>
+    {{else}}
+		<div class='col-md-8 type-split-bar'>
 			<div class='progress'>
         {{#each values}}
           {{>valueBar}}
 			  {{/each}}
 			</div>
-		</div>
+    </div>
+    {{/if}}
 	
 		
   </div>

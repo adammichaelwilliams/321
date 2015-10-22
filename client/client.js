@@ -1,4 +1,8 @@
 
+DETAILED_VIEW_TYPES = "types";
+DETAILED_VIEW_VALUES = "values";
+
+
 Template.collectionDocs.helpers({
 
 	collectionName: function(){
@@ -45,8 +49,33 @@ Template.collectionDetail.onCreated(function(){
 	}, 1000);
 });
 
+Template.collectionDetail.events({
+  "click .select-types": function(e, t) {
+    Session.set('analysisViewType', DETAILED_VIEW_TYPES);
+  },
+  "click .select-values": function(e, t) {
+    Session.set('analysisViewType', DETAILED_VIEW_VALUES);
+  }
+});
+
 Template.collectionDetail.helpers({
 
+  typesView: function() {
+    var view = Session.get('analysisViewType');
+    if(!view || view == DETAILED_VIEW_TYPES) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  valuesView: function() {
+    var view = Session.get('analysisViewType');
+    if(!view || view == DETAILED_VIEW_TYPES) {
+      return false;
+    } else {
+      return true;
+    }
+  },
 	collectionName: function(){
 		// Todo the whole thing
 		return FlowRouter.getParam('collectionName');
@@ -97,6 +126,40 @@ Template.collectionDetail.helpers({
 
 });
 
+Template.valueBar.events({
+
+  "click .progress-bar": function(e, t) {
+
+    e.preventDefault();
+
+    console.log(t.data);
+    var hierarchy = t.data.hierarchy;
+    var type = t.data.type;
+    var value = t.data.value;
+    var valType = t.data.valType;
+    
+    var path = hierarchy.replace(/#/g, '.');
+
+    var query = {}
+    if(valType === "standard") {
+      query = '"'+ path + '" : ' + value;
+    } else if(valType === "undefined") {
+      query = '"'+ path + '" : {$exists: false} ';
+    } else {
+      //TODO add type dependent logic for mongo query
+      //query[path] = { $exists: true }
+      query = '"' + path + '" : {$exists: true} ';
+    }
+
+		var colName = FlowRouter.getParam('collectionName');
+
+    Session.set('queryString', query);
+    Session.set('paramString', "");
+
+//    FlowRouter.go('/'+colName+'/query');
+  }
+});
+
 Template.progressBar.events({
 
   "click .progress-bar": function(e, t) {
@@ -127,6 +190,14 @@ Template.progressBar.events({
   }
 });
 Template.fieldNode.helpers({
+  typesView: function() {
+    var view = Session.get('analysisViewType');
+    if(!view || view == DETAILED_VIEW_TYPES) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   types: function() {
     var self = this;
 
@@ -171,15 +242,20 @@ Template.fieldNode.helpers({
 		}
     var totalCount = metaCollection.totalCount;
 
+    console.log(self);
     var total = 0;
     var values = [];
     if(self.valType == "unique") {
       values.push({ value: 'unique',
+                    valType: 'unique',
+                        hierarchy: self.hierarchy,
                         number: self.total,
                         percent: Math.round((100*(self.total/totalCount))),
                         totalPercent: Math.round((100*(self.total/totalCount)))});
     } else if(self.valType == "object") {
       values.push({ value: 'object',
+                    valType: 'object',
+                        hierarchy: self.hierarchy,
                         number: self.total,
                         percent: Math.round((100*(self.total/totalCount))),
                         totalPercent: Math.round((100*(self.total/totalCount)))});
@@ -187,12 +263,16 @@ Template.fieldNode.helpers({
       _.each(this.vals, function(count, value) {
 
         values.push({  value: value, 
+                       valType: self.valType,
+                       hierarchy: self.hierarchy,
                        number: count,
                        percent: Math.round(100*(count/self.total)),
                        totalPercent: Math.round(100*(count/totalCount))});
       });
     }
     values.push({  value: 'undefined',
+                  valType: 'undefined',
+                  hierarchy: self.hierarchy,
                   number: totalCount - self.total,
                   percent: Math.round(100-(100*(self.total/totalCount))),
                   totalPercent: Math.round(100-(100*(self.total/totalCount)))});
