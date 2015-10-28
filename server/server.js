@@ -202,7 +202,7 @@ Meteor.methods({
             hdfTree[hashPath].depth = depth;
             hdfTree[hashPath].types[type] = 1;
             if(type === "string" || type === "boolean" || type === "number") {
-              hdfTree[hashPath].valType = "standard";
+              hdfTree[hashPath].valType = type;
               hdfTree[hashPath].vals = {};
               hdfTree[hashPath].vals[value] = 1;
             } else {

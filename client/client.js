@@ -141,7 +141,9 @@ Template.valueBar.events({
     var path = hierarchy.replace(/#/g, '.');
 
     var query = {}
-    if(valType === "standard") {
+    if(valType === "string") {
+      query = '"'+ path + '" : "' + value + '"';
+    } else if(valType === "boolean" || valType === "number") {
       query = '"'+ path + '" : ' + value;
     } else if(valType === "undefined") {
       query = '"'+ path + '" : {$exists: false} ';
