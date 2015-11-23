@@ -2,6 +2,8 @@
 DETAILED_VIEW_TYPES = "types";
 DETAILED_VIEW_VALUES = "values";
 
+COLLECTION_VIEW_QUERY = "query";
+COLLECTION_VIEW_DETAILS = "details";
 
 Template.collectionDocs.helpers({
 
@@ -33,33 +35,67 @@ Tracker.autorun(function() {
 });
 
 /*
-Template.collectionDetail.created = function() {
+Template.collectionView.created = function() {
 
   this.metaHandle = Meteor.subscribe('metaCollections');
 }
-Template.collectionDetail.destroyed = function() {
+Template.collectionView.destroyed = function() {
   
   this.metaHandle.stop();
 }
 */
 
-Template.collectionDetail.onCreated(function(){
+Template.collectionView.onCreated(function(){
+
 	setTimeout(function(){
 		$('[data-toggle="tooltip"]').tooltip();
 	}, 1000);
 });
 
-Template.collectionDetail.events({
+Template.details.events({
   "click .select-types": function(e, t) {
     Session.set('analysisViewType', DETAILED_VIEW_TYPES);
   },
   "click .select-values": function(e, t) {
     Session.set('analysisViewType', DETAILED_VIEW_VALUES);
-  }
+  },
+});
+Template.collectionView.events({
+  "click .toggle-details": function(e, t) {
+		var colName = FlowRouter.getParam('collectionName');
+    FlowRouter.go('/'+colName+'/details');
+  },
+  "click .toggle-query": function(e, t) {
+    Session.set('collectionViewType', COLLECTION_VIEW_QUERY);
+		var colName = FlowRouter.getParam('collectionName');
+    FlowRouter.go('/'+colName+'/query');
+  },
 });
 
-Template.collectionDetail.helpers({
+Template.collectionView.helpers({
+  queryView: function() {
+    var view = Session.get('collectionViewType');
+    if(!view || view == COLLECTION_VIEW_QUERY) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  detailsView: function() {
+    var view = Session.get('collectionViewType');
+    if(!view || view == COLLECTION_VIEW_DETAILS) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+	collectionName: function(){
+		// Todo the whole thing
+		return FlowRouter.getParam('collectionName');
+	}
+});
 
+Template.details.helpers({
   typesView: function() {
     var view = Session.get('analysisViewType');
     if(!view || view == DETAILED_VIEW_TYPES) {
@@ -76,11 +112,16 @@ Template.collectionDetail.helpers({
       return true;
     }
   },
-	collectionName: function(){
-		// Todo the whole thing
-		return FlowRouter.getParam('collectionName');
-	},
-
+  docCount: function() {
+    var metaCollection = Meta.findOne({
+			name: FlowRouter.getParam('collectionName')
+		});
+    if(metaCollection.totalCount) {
+      return metaCollection.totalCount;
+    } else {
+      return null;
+    }
+  },
 	fields: function(){
 		
 		var metaCollection = Meta.findOne({
@@ -158,7 +199,7 @@ Template.valueBar.events({
     Session.set('queryString', query);
     Session.set('paramString', "");
 
-//    FlowRouter.go('/'+colName+'/query');
+    FlowRouter.go('/'+colName+'/query');
   }
 });
 
@@ -188,7 +229,7 @@ Template.progressBar.events({
     Session.set('queryString', query);
     Session.set('paramString', "");
 
-//    FlowRouter.go('/'+colName+'/query');
+    FlowRouter.go('/'+colName+'/query');
   }
 });
 Template.fieldNode.helpers({
@@ -288,4 +329,22 @@ Template.sidebar.helpers({
 		return Meta.find({}, { sort: { name: 1 }});
 	}
 });
+
+
+
+Template.documentDetail.helpers({
+
+  docId: function() {
+
+		var docId = FlowRouter.getParam('documentId');
+
+    return docId;
+  }
+});
+
+
+
+
+
+
 

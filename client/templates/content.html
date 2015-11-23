@@ -3,27 +3,46 @@
 </template>
 
 
-<template name="collectionDetail">
-	<div class='details-page'>
-		
+<template name="collectionView">
 
+  <div class="collectionViewHeader">
+    <h3>Collection: {{ collectionName }}</h3>
+    <div class="toggle-view">
+      <div class="btn toggle-details {{#if detailsView}}selected{{/if}}">Details</div>
+      <div class="btn toggle-query {{#if queryView}}selected{{/if}}">Query</div>
+    </div>
+  </div>
+
+  <div class="collectionViewMain">
+  {{#if detailsView}}
+    {{>details}}
+  {{/if}}
+
+  {{#if queryView}}
+    {{>query}}
+  {{/if}}
+  </div>
+</template>
+
+<template name="details">
+  <div class='details-page'>
     <div class='toggle-view'>
       <div class='select-types {{#if typesView}}selected{{/if}}'>Types</div>
       <div class='select-values {{#if valuesView}}selected{{/if}}'>Values</div>
     </div>
-    
-    <h3>Collection Analysis: {{ collectionName }}</h3>
 
+    {{#if docCount}}
+      {{docCount}} documents
+    {{/if}}
+    
     <div class='analysis-view'>
-		{{#each fields}}
-			{{> fieldNode }}
+    {{#each fields}}
+      {{> fieldNode }}
     {{/each}}
     </div>
-		
-	</div>
-  
-  {{>query}}
+  </div>
 </template>
+
 
 <template name="fieldNode">
 	<div class="analyzed-field-row row {{#if zebraBg}}zebra{{/if}}">
@@ -108,6 +127,12 @@
 </template>
 
 <template name="documentDetail">
-	This is a particular document
+
+  This is a particular document
+
+  <p>
+  {{docId}} 
+  </p>
+
 </template>
 

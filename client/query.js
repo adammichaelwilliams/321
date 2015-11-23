@@ -20,6 +20,18 @@ Template.query.created = function() {
   
 }
 
+Template.documentRow.events({
+  "click .documentRow": function(e, t) {
+
+    console.log(t);
+    if(t && t.data && t.data._id) {
+
+		  var colName = FlowRouter.getParam('collectionName');
+      FlowRouter.go('/'+colName+'/' + t.data._id);
+    }
+  }
+});
+
 Template.documentRow.helpers({
 
   prettyDoc: function() {
