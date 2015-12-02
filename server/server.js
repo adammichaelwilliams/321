@@ -5,7 +5,15 @@ Meteor.startup(function () {
 });
 
 
-// publish posts
+Meteor.publish('doc', function(colName, docId) {
+
+  var selectedCollection = Mongo.Collection.get(colName);
+
+  var docs = selectedCollection.find({_id: {$in: [docId]}});
+
+  return docs;
+});
+
 Meteor.publish('queryResult', function(collectionName, queryString, parameterString) {
   
   var selectedCollection = Mongo.Collection.get(collectionName);

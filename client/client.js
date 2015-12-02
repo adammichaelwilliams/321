@@ -330,7 +330,18 @@ Template.sidebar.helpers({
 	}
 });
 
+Template.documentDetail.created = function() {
 
+  var colName = FlowRouter.getParam('collectionName');
+
+  var docId = FlowRouter.getParam('documentId');
+
+  this.docHandle = Meteor.subscribe('doc', colName, docId);
+}
+Template.documentDetail.destroyed = function() {
+  
+  this.docHandle.stop();
+}
 
 Template.documentDetail.helpers({
 
@@ -339,6 +350,18 @@ Template.documentDetail.helpers({
 		var docId = FlowRouter.getParam('documentId');
 
     return docId;
+  },
+  doc: function() {
+		
+    var colName = FlowRouter.getParam('collectionName');
+  
+    var selectedCollection = Mongo.Collection.get(colName);
+
+    var docId = FlowRouter.getParam('documentId');
+
+    var doc = selectedCollection.findOne(docId);
+
+    return doc;
   }
 });
 
