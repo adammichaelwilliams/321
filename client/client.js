@@ -362,7 +362,23 @@ Template.documentDetail.helpers({
     var doc = selectedCollection.findOne(docId);
 
     return doc;
-  }
+  },
+  items: function() {
+		
+    var colName = FlowRouter.getParam('collectionName');
+  
+    var selectedCollection = Mongo.Collection.get(colName);
+
+    var docId = FlowRouter.getParam('documentId');
+
+    var doc = selectedCollection.findOne(docId);
+
+    var items = [];
+    _.each(doc, function(val, key) {
+      items.push({key: key, val: val});
+    });
+    return items;
+  },
 });
 
 
