@@ -138,6 +138,11 @@
     <h1>{{doc._id}}</h1>
   {{/if}}
 
+  {{#if metaDoc}}
+
+    <h1>{{metaDoc._id}}</h1>
+
+  {{/if}}
   {{#each items}}
     <p>{{key}}: {{val}}</p>
   {{/each}}

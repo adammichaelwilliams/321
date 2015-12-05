@@ -363,6 +363,14 @@ Template.documentDetail.helpers({
 
     return doc;
   },
+  metaDoc: function() {
+
+    var colName = FlowRouter.getParam('collectionName');
+
+    var metaDoc = Meta.findOne({name: colName});
+
+    return metaDoc;
+  },
   items: function() {
 		
     var colName = FlowRouter.getParam('collectionName');
