@@ -383,10 +383,24 @@ Template.documentDetail.helpers({
 
     var items = [];
     _.each(doc, function(val, key) {
-      items.push({key: key, val: val});
+      items.push({key: key, val: val, type: typeof val});
     });
     return items;
   },
+});
+
+Template.editRow.events({
+
+  "click .startEdit": function(e, t) {
+    console.log(e);
+    console.log(t);
+  }
+});
+Template.editRow.helpers({
+  editing: function() {
+
+
+  }
 });
 
 
